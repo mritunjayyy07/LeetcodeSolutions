@@ -1,16 +1,15 @@
 class Solution {
     public int maxCount(int[] banned, int n, int maxSum) {
-        int count = 0;
-        int sum = 0 ;
-        Map<Integer,Integer> map= new HashMap<>();
-
-        for(int i = 0 ; i < banned.length;i++)
-        {
-            map.put(banned[i],1);
+         Set<Integer> bannedSet = new HashSet<>();
+        for (int num : banned) {
+            bannedSet.add(num);
         }
-        for(int i = 1; i <= n ; i++)
-        {
-            if (map.containsKey(i)) {
+
+        int count = 0;
+        int sum = 0;
+
+        for (int i = 1; i <= n; i++) {
+            if (bannedSet.contains(i)) {
                 continue;
             }
 
@@ -21,7 +20,8 @@ class Solution {
                 break;
             }
         }
+
         return count;
-              
+        
     }
 }
