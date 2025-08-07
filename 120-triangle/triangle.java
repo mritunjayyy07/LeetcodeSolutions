@@ -8,7 +8,7 @@ class Solution {
                 triangle.get(row).set(col, curr + Math.min(below, belowRight));
             }
         }
-        // The top element will have the minimum path sum
+        
         return triangle.get(0).get(0);
         
     }
