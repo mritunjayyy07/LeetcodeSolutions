@@ -4,13 +4,11 @@ class Solution {
         int skip = -1;
         for(int i =0; i < bits.length; i++)
         {
-             if(bits[i] == 0 && i == bits.length-1)
-            {
-                return true;
-            }
+             if(i == bits.length-1)
+             return true;
             
             
-            if(bits[i] == 1 && i!=bits.length-1)
+            if(bits[i] == 1)
             {
                 i++;
             }
