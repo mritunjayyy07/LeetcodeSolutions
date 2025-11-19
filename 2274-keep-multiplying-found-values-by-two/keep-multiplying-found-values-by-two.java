@@ -1,19 +1,34 @@
 class Solution {
-    public static int findFinalValue(int[] nums, int original) {
+    static boolean isFound(int [] nums, int search)
+    {
+        Arrays.sort(nums);
+        int left = 0;
+        int right = nums.length-1;
+        while(left <= right)
+        {
+            int mid = (left+right)/2;
+            if(nums[mid] == search)
+            {
+                return true;
+            }
+            else if(nums[mid] > search)
+            {
+                right = mid-1;
+            }
+            else 
+            left = mid+1;
+        }
+        return false;
+    }
+    public int findFinalValue(int[] nums, int original) {
+
+        while(isFound(nums,original))
+        {
+            original *=2;
+            
+        }
+        return original;
+
         
-    	int n =  nums.length;
-    	HashSet<Integer> hs = new HashSet<Integer>();
-    	
-    	for (int i = 0; i < n; i++) {
-			hs.add(nums[i]);
-		}
-    	
-    	while(hs.contains(original)) {
-    		
-    		original *= 2;
-    		
-    	}
-    	
-    	return original;
     }
 }
