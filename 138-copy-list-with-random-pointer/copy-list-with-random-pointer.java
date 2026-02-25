@@ -1,44 +1,43 @@
-/*
-// Definition for a Node.
-class Node {
-    int val;
-    Node next;
-    Node random;
-
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
-    }
-}
-*/
-
 class Solution {
     public Node copyRandomList(Node head) {
+        if (head == null)
+            return null;
 
-        if(head == null)
-        return null;
-        
-        Map<Node,Node> map = new HashMap<>();
         Node temp = head;
 
-        while(temp != null)
-        {
-            Node newnode =new  Node(temp.val);
-            map.put(temp,newnode);
-            temp = temp.next;
+        // Step 1: Insert copy nodes
+        while (temp != null) {
+            Node newnode = new Node(temp.val);
+            newnode.next = temp.next;
+            temp.next = newnode;
+            temp = newnode.next;
+        }
 
-        }
-        
+        // Step 2: Assign random pointers
         temp = head;
-        while(temp != null)
-        {
-            Node copynode = map.get(temp);
-            copynode.next = map.get(temp.next);
-            copynode.random = map.get(temp.random);
-            temp = temp.next;
+        while (temp != null) {
+            Node copynode = temp.next;
+            if (temp.random != null) {
+                copynode.random = temp.random.next;
+            }
+            temp = temp.next.next;
         }
-        return map.get(head);
-        
+
+        // Step 3: Separate the lists
+        Node curr = head;
+        Node dummy = new Node(0);
+        Node copyCurr = dummy;
+
+        while (curr != null) {
+            Node copy = curr.next;
+
+            copyCurr.next = copy;
+            copyCurr = copy;
+
+            curr.next = copy.next;
+            curr = curr.next;
+        }
+
+        return dummy.next;
     }
 }
